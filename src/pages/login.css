@@ -1,0 +1,24 @@
+.fullheight {
+    height: 100%;
+}
+
+.xc {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.element-margin-top {
+    margin-top: 0.5rem;
+}
+
+.element-margin-top-high {
+    margin-top: 2rem;
+}
+
+.list-button {
+    display: flex;
+    flex-direction: column;
+    gap: 3px;
+}

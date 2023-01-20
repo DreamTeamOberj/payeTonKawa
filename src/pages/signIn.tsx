@@ -12,19 +12,25 @@ import {
     IonTitle,
     IonToolbar
 } from '@ionic/react';
-
-import './login.css';
+import './signIn.css';
 import React from "react";
 
-const Login: React.FC = () => {
+const SignIn: React.FC = () => {
     return (
         <IonPage>
             <IonContent className="ion-padding">
                 <form className="xc fullheight">
-                    <div className="ion-text-center ion-margin-top">
-                    <h3>Connexion</h3>
-                    </div>
-                    <IonItem className='element-margin-top-high'>
+                    <IonItem className='element-margin-top'>
+                        <IonLabel position="floating">Nom</IonLabel>
+                        <IonInput type='text'></IonInput>
+                    </IonItem>
+
+                    <IonItem className='element-margin-top'>
+                        <IonLabel position="floating">Prénom</IonLabel>
+                        <IonInput type='text'></IonInput>
+                    </IonItem>
+
+                    <IonItem className='element-margin-top'>
                         <IonLabel position="floating">Email</IonLabel>
                         <IonInput type='email'></IonInput>
                     </IonItem>
@@ -33,9 +39,14 @@ const Login: React.FC = () => {
                         <IonLabel position="floating">Password</IonLabel>
                         <IonInput type='password'></IonInput>
                     </IonItem >
+
+                    <IonItem  className='element-margin-top'>
+                        <IonLabel position="floating">Confirmer le password</IonLabel>
+                        <IonInput type='password'></IonInput>
+                    </IonItem >
+
                     <div className='element-margin-top-high list-button'>
-                        <IonButton className="element-margin-right">Connexion</IonButton>
-                        <IonButton href='/sign-in'>Créer un compte</IonButton>
+                        <IonButton type='submit'>Créer un compte</IonButton>
                     </div>
                 </form>
             </IonContent>
@@ -43,4 +54,4 @@ const Login: React.FC = () => {
     );
 };
 
-export default Login;
+export default SignIn;
