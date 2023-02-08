@@ -1,0 +1,5 @@
+.spinner-crescent {
+    transform: scale(0.2);
+    width: -webkit-fill-available;
+    height: -webkit-fill-available;
+}
