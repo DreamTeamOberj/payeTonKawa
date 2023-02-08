@@ -13,7 +13,7 @@ import {
     IonToolbar
 } from '@ionic/react';
 
-import './login.css';
+import './styles/login.css';
 import React from "react";
 
 const Login: React.FC = () => {

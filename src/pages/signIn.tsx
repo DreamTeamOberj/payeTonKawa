@@ -12,8 +12,10 @@ import {
     IonTitle,
     IonToolbar
 } from '@ionic/react';
-import './signIn.css';
+import './styles/signIn.css';
 import React from "react";
+
+
 
 const SignIn: React.FC = () => {
     return (
@@ -36,12 +38,12 @@ const SignIn: React.FC = () => {
                     </IonItem>
 
                     <IonItem  className='element-margin-top'>
-                        <IonLabel position="floating">Password</IonLabel>
+                        <IonLabel position="floating">Mot de passe</IonLabel>
                         <IonInput type='password'></IonInput>
                     </IonItem >
 
                     <IonItem  className='element-margin-top'>
-                        <IonLabel position="floating">Confirmer le password</IonLabel>
+                        <IonLabel position="floating">Confirmer le mot de passe</IonLabel>
                         <IonInput type='password'></IonInput>
                     </IonItem >
 
