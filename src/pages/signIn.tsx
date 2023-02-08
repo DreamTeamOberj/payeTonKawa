@@ -12,10 +12,9 @@ import {
     IonTitle,
     IonToolbar
 } from '@ionic/react';
+
 import './styles/signIn.css';
 import React from "react";
-
-
 
 const SignIn: React.FC = () => {
     return (
