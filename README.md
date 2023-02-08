@@ -2,8 +2,6 @@
 
 ## Table de matières
 
-* [PayeTonKawa](#payetonkawa)
-  *[Table de matières](#table-de-matières)
   * [Technologies](#technologies)
   * [Installation](#installation)
   * [Ionic](#ionic)
