@@ -12,14 +12,12 @@ import './styles/product.css';
 import FetchProducts from "../services/fetchProducts";
 import { useParams } from "react-router-dom";
 
-
 const Product: React.FC = () => {
 
     const { id } : any = useParams();
 
     const { data } : any = FetchProducts("https://615f5fb4f7254d0017068109.mockapi.io/api/v1/products/" + id);
 
-    
     if (!data) {
         return <IonPage>
             <IonContent class="spinner">
@@ -31,13 +29,13 @@ const Product: React.FC = () => {
         return (
             <IonPage>
                 <IonContent className="ion-padding">
-                    <div>
+                    <IonCard className="product ion-padding">
                         <h1>{product.name}</h1>
                         <p>Price: {product.details.price}</p>
                         <p>Description: {product.details.description}</p>
                         <p>Color: {product.details.color}</p>
                         <p>Stock: {product.stock}</p>
-                    </div>
+                    </IonCard>
                 </IonContent>
             </IonPage>
         );

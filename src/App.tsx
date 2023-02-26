@@ -1,19 +1,18 @@
-import { Redirect, Route } from 'react-router-dom';
+import {Redirect, Route} from 'react-router-dom';
 import {
-  IonApp, IonHeader,
-  IonIcon,
-  IonLabel,
-  IonRouterOutlet,
-  IonTabBar,
-  IonTabButton,
-  IonTabs, IonTitle,
-  setupIonicReact
+    IonApp, IonHeader,
+    IonIcon, IonImg,
+    IonLabel,
+    IonRouterOutlet,
+    IonTabBar,
+    IonTabButton,
+    IonTabs, IonTitle,
+    setupIonicReact
 } from '@ionic/react';
-import { IonReactRouter } from '@ionic/react-router';
-import {homeOutline, personCircleOutline, square, triangle} from 'ionicons/icons';
-import Tab1 from './pages/Tab1';
+import {IonReactRouter} from '@ionic/react-router';
+import {exit, homeOutline, personCircleOutline, square, triangle} from 'ionicons/icons';
 import Login from "./pages/login";
-import Home from  "./pages/home"
+import Home from "./pages/home"
 import profile from "./pages/profile"
 import Product from "./pages/product"
 
@@ -35,44 +34,58 @@ import '@ionic/react/css/display.css';
 
 /* Theme variables */
 import './theme/variables.css';
-import React from "react";
+import React, {useEffect} from "react";
 import SignIn from './pages/signIn';
 import Profile from "./pages/profile";
+import Logout from "./pages/logout";
 
 setupIonicReact();
 
-const App: React.FC = () => (
-  <IonApp>
-    <IonHeader>
-      <IonTitle className="ion-text-center ion-margin-vertical">
-        PayeTonKawa
-      </IonTitle>
-    </IonHeader>
-    <IonReactRouter>
-      <IonTabs>
-        <IonRouterOutlet>
-          <Route exact path="/" render={() => <Redirect to="/login" />} />
-          <Route exact path="/login"><Login /></Route>
-          <Route exact path="/sign-in"><SignIn/></Route>
-          <Route exact path="/home"><Home/></Route>
-          <Route exact path="/profile"><Profile/></Route>
-          <Route exact path="/product/:id"><Product/></Route>
-        </IonRouterOutlet>
-        <IonTabBar slot="bottom">
-          <IonTabButton tab="tab1" href="/tab1">
-            <IonIcon icon={triangle} />
-            <IonLabel>Tab 1</IonLabel>
-          </IonTabButton>
-          <IonTabButton tab="home" href="/home">
-            <IonIcon icon={homeOutline} />
-          </IonTabButton>
-          <IonTabButton tab="Profile" href="/profile">
-            <IonIcon icon={personCircleOutline} />
-          </IonTabButton>
-        </IonTabBar>
-      </IonTabs>
-    </IonReactRouter>
-  </IonApp>
-);
+const App: React.FC = () => {
+
+    useEffect(() => {
+        const tabBar = document.getElementById('tabBar');
+        const path = window.location.href;
+        if (tabBar !== null && path.includes("login")) {
+            tabBar.style.display = 'none';
+        }
+    });
+
+    return (
+        <IonApp>
+            <IonHeader>
+                <IonTabBar id="headerTabBar">
+                    <IonTabButton tab="home2" href="/home">
+                        <IonImg src="/assets/icon/icon.png"/>
+                    </IonTabButton>
+                </IonTabBar>
+            </IonHeader>
+            <IonReactRouter>
+                <IonTabs>
+                    <IonRouterOutlet>
+                        <Route exact path="/" render={() => <Redirect to="/login"/>}/>
+                        <Route exact path="/login"><Login/></Route>
+                        <Route exact path="/sign-in"><SignIn/></Route>
+                        <Route exact path="/home"><Home/></Route>
+                        <Route exact path="/profile"><Profile/></Route>
+                        <Route exact path="/product/:id"><Product/></Route>
+                      <Route exact path="/logout"><Logout/></Route>
+                    </IonRouterOutlet>
+                    <IonTabBar id="tabBar" slot="bottom">
+                        <IonTabButton tab="home" href="/home">
+                            <IonIcon icon={homeOutline}/>
+                        </IonTabButton>
+                        <IonTabButton tab="Profile" href="/profile">
+                            <IonIcon icon={personCircleOutline}/>
+                        </IonTabButton>
+                        <IonTabButton tab="Logout" href="/logout">
+                            <IonIcon icon={exit}/>
+                        </IonTabButton>
+                    </IonTabBar>
+                </IonTabs>
+            </IonReactRouter>
+        </IonApp>
+    );
+};
 
 export default App;
