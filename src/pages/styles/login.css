@@ -22,3 +22,7 @@
     flex-direction: column;
     gap: 3px;
 }
+
+#headerTabBar ion-img {
+    width: 60px
+}
