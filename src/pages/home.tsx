@@ -5,25 +5,30 @@ import {
     IonCardHeader,
     IonCardTitle,
     IonCardContent,
-    IonSpinner, IonInfiniteScroll, IonInfiniteScrollContent
+    IonSpinner, IonInfiniteScroll, IonInfiniteScrollContent, IonImg, IonSearchbar
 } from '@ionic/react';
 
 import { useHistory } from 'react-router-dom';
 import './styles/home.css';
-import FetchProducts from "../services/fetchProducts";
+import FetchDatas from "../services/fetchDatas";
 import React, {useEffect, useState} from "react";
 import {Simulate} from "react-dom/test-utils";
 import waiting = Simulate.waiting;
 
-const Home: React.FC = () => {
+const Order: React.FC = () => {
 
     const [limit, setLimit] = useState<number>(10);
-    const {data} = FetchProducts("https://615f5fb4f7254d0017068109.mockapi.io/api/v1/products?page=1&limit=" + limit);
+    const {data} = FetchDatas("https://615f5fb4f7254d0017068109.mockapi.io/api/v1/products?page=1&limit=" + limit);
 
     const history = useHistory();
 
     const goToProduct = (id: string) => {
         history.push(`/product/${id}`);
+    }
+
+    function getRandomImage(max : number) {
+       const integer = Math.floor(Math.random() * max) + 1;
+       return "/assets/image/cafe-" + integer + ".png";
     }
 
     function searchNext(event: CustomEvent<void>) {
@@ -43,14 +48,15 @@ const Home: React.FC = () => {
         return (
             <IonPage>
                 <IonContent className="ion-padding">
-                    {data.map((product: any) =>
-                        <IonCard key={product?.id} onClick={() => goToProduct(product.id)}>
+                    <IonSearchbar animated={true} placeholder="Rechercher un produit" show-clear-button="focus"></IonSearchbar>
+                    {data.map((profile: any) =>
+                        <IonCard key={profile?.id} onClick={() => goToProduct(profile.id)}>
                             <IonCardHeader>
-                                <IonCardTitle>{product?.name}</IonCardTitle>
+                                <IonCardTitle>{profile?.name}</IonCardTitle>
                             </IonCardHeader>
-                            {Object.keys(product.details).map((detail: any, index) =>
-                                <IonCardContent key={index}>{product.details[detail]}</IonCardContent>
-                            )}
+                            <IonImg className="image-home" src={getRandomImage(4)}></IonImg>
+                            <IonCardContent> {profile?.description}</IonCardContent>
+                            <IonCardContent> {profile?.price} </IonCardContent>
                         </IonCard>)}
                     <IonInfiniteScroll threshold="100px"
                                        onIonInfinite={(e: CustomEvent<void>) => searchNext(e)}>
@@ -64,4 +70,4 @@ const Home: React.FC = () => {
     }
 };
 
-export default Home;
+export default Order;

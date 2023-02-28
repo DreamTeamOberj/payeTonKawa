@@ -4,6 +4,30 @@
     height: -webkit-fill-available;
 }
 
-ion-card:nth-of-type(1) {
+ion-searchbar {
     margin-top: 50px;
+}
+
+ion-card {
+    min-height: 400px;
+}
+
+ion-card:nth-of-type(1) {
+    margin-top: 20px;
+}
+
+.image-home {
+    width: 200px;
+    margin: 0 auto;
+}
+
+#headerTabBar {
+    display: flex;
+    justify-content: center;
+    position: relative;
+}
+
+.left-button {
+    position: absolute;
+    right: 1rem;
 }
