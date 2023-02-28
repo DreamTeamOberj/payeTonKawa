@@ -37,7 +37,7 @@ import './theme/variables.css';
 import React, {useEffect} from "react";
 import SignIn from './pages/signIn';
 import Profile from "./pages/profile";
-import Order from "./pages/order"
+import Orders from "./pages/orders"
 import Logout from "./pages/logout";
 
 setupIonicReact();
@@ -76,8 +76,8 @@ const App: React.FC = () => {
                         <Route exact path="/home"><Home/></Route>
                         <Route exact path="/profile"><Profile/></Route>
                         <Route exact path="/product/:id"><Product/></Route>
-                        <Route exact path="/order"><Order/></Route>
-                        <Route exact path="/order/:id"><Order/></Route>
+                        <Route exact path="/order"><Orders/></Route>
+                        <Route exact path="/order/:id"><Orders/></Route>
                       <Route exact path="/logout"><Logout/></Route>
                     </IonRouterOutlet>
                     <IonTabBar id="tabBar" slot="bottom">

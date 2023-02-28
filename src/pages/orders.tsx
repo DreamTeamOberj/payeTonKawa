@@ -5,7 +5,7 @@ import {
     IonCardHeader,
     IonCardTitle,
     IonCardContent,
-    IonSpinner, IonInfiniteScroll, IonInfiniteScrollContent, IonImg
+    IonSpinner, IonInfiniteScroll, IonInfiniteScrollContent, IonImg, IonSearchbar
 } from '@ionic/react';
 
 import { useHistory } from 'react-router-dom';
@@ -15,7 +15,7 @@ import React, {useEffect, useState} from "react";
 import {Simulate} from "react-dom/test-utils";
 import waiting = Simulate.waiting;
 
-const Home: React.FC = () => {
+const Orders: React.FC = () => {
 
     const [limit, setLimit] = useState<number>(10);
     const {data} = FetchDatas("https://615f5fb4f7254d0017068109.mockapi.io/api/v1/products?page=1&limit=" + limit);
@@ -48,6 +48,7 @@ const Home: React.FC = () => {
         return (
             <IonPage>
                 <IonContent className="ion-padding">
+                    <IonSearchbar animated={true} placeholder="Rechercher un produit" show-clear-button="focus"></IonSearchbar>
                     {data.map((order: any) =>
                         <IonCard key={order?.id} onClick={() => goToOrder(order.id)}>
                             <IonCardHeader>
@@ -69,4 +70,4 @@ const Home: React.FC = () => {
     }
 };
 
-export default Home;
+export default Orders;
