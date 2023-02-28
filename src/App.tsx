@@ -10,7 +10,7 @@ import {
     setupIonicReact
 } from '@ionic/react';
 import {IonReactRouter} from '@ionic/react-router';
-import {exit, homeOutline, personCircleOutline, square, triangle} from 'ionicons/icons';
+import {basket, exit, homeOutline, personCircleOutline, square, triangle} from 'ionicons/icons';
 import Login from "./pages/login";
 import Home from "./pages/home"
 import profile from "./pages/profile"
@@ -37,6 +37,7 @@ import './theme/variables.css';
 import React, {useEffect} from "react";
 import SignIn from './pages/signIn';
 import Profile from "./pages/profile";
+import Orders from "./pages/orders"
 import Logout from "./pages/logout";
 
 setupIonicReact();
@@ -45,9 +46,12 @@ const App: React.FC = () => {
 
     useEffect(() => {
         const tabBar = document.getElementById('tabBar');
+        const headerBar = document.getElementById('headerTabBar');
+
         const path = window.location.href;
-        if (tabBar !== null && path.includes("login")) {
+        if (tabBar !== null && headerBar !== null && path.includes("login")) {
             tabBar.style.display = 'none';
+            headerBar.style.display = 'none';
         }
     });
 
@@ -57,6 +61,9 @@ const App: React.FC = () => {
                 <IonTabBar id="headerTabBar">
                     <IonTabButton tab="home2" href="/home">
                         <IonImg src="/assets/icon/icon.png"/>
+                    </IonTabButton>
+                    <IonTabButton className="left-button" tab="Logout" href="/logout">
+                        <IonIcon icon={exit}/>
                     </IonTabButton>
                 </IonTabBar>
             </IonHeader>
@@ -69,17 +76,19 @@ const App: React.FC = () => {
                         <Route exact path="/home"><Home/></Route>
                         <Route exact path="/profile"><Profile/></Route>
                         <Route exact path="/product/:id"><Product/></Route>
+                        <Route exact path="/order"><Orders/></Route>
+                        <Route exact path="/order/:id"><Orders/></Route>
                       <Route exact path="/logout"><Logout/></Route>
                     </IonRouterOutlet>
                     <IonTabBar id="tabBar" slot="bottom">
+                        <IonTabButton tab="Order" href="/order">
+                            <IonIcon icon={basket}/>
+                        </IonTabButton>
                         <IonTabButton tab="home" href="/home">
                             <IonIcon icon={homeOutline}/>
                         </IonTabButton>
                         <IonTabButton tab="Profile" href="/profile">
                             <IonIcon icon={personCircleOutline}/>
-                        </IonTabButton>
-                        <IonTabButton tab="Logout" href="/logout">
-                            <IonIcon icon={exit}/>
                         </IonTabButton>
                     </IonTabBar>
                 </IonTabs>

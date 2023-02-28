@@ -10,7 +10,7 @@ import {
     IonList,
     IonPage,
     IonTitle,
-    IonToolbar
+    IonToolbar, IonImg
 } from '@ionic/react';
 
 import './styles/login.css';
@@ -20,10 +20,8 @@ const Login: React.FC = () => {
     return (
         <IonPage>
             <IonContent className="ion-padding">
+                <IonImg className="image-login" src="/assets/icon/icon.png"/>
                 <form className="xc fullheight">
-                    <div className="ion-text-center ion-margin-top">
-                    <h3>Connexion</h3>
-                    </div>
                     <IonItem className='element-margin-top-high'>
                         <IonLabel position="floating">Email</IonLabel>
                         <IonInput type='email'></IonInput>

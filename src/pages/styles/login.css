@@ -1,7 +1,3 @@
-.fullheight {
-    height: 100%;
-}
-
 .xc {
     display: flex;
     flex-direction: column;
@@ -25,4 +21,9 @@
 
 #headerTabBar ion-img {
     width: 60px
+}
+
+.image-login {
+    width: 100px;
+    margin: 3rem auto 0 auto;
 }

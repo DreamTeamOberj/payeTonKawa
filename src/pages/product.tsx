@@ -9,14 +9,14 @@ import {
 } from '@ionic/react';
 
 import './styles/product.css';
-import FetchProducts from "../services/fetchProducts";
+import FetchDatas from "../services/fetchDatas";
 import { useParams } from "react-router-dom";
 
 const Product: React.FC = () => {
 
     const { id } : any = useParams();
 
-    const { data } : any = FetchProducts("https://615f5fb4f7254d0017068109.mockapi.io/api/v1/products/" + id);
+    const { data } : any = FetchDatas("https://615f5fb4f7254d0017068109.mockapi.io/api/v1/products/" + id);
 
     if (!data) {
         return <IonPage>

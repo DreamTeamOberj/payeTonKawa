@@ -1,0 +1,8 @@
+.card-profile {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    margin-top: 100px !important;
+    flex-direction: column;
+    height: 400px;
+}
