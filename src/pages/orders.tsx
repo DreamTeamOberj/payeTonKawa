@@ -20,7 +20,7 @@ const Orders: React.FC = () => {
 
     const [limit, setLimit] = useState<number>(10);
     const {data} = FetchDatas("https://615f5fb4f7254d0017068109.mockapi.io/api/v1/products?page=1&limit=" + limit);
-    const { isAuthenticated } = useAuth0();
+    const { isAuthenticated, isLoading } = useAuth0();
     const history = useHistory();
 
     const goToOrder = (id: string) => {
@@ -37,11 +37,11 @@ const Orders: React.FC = () => {
         (event.target as HTMLIonInfiniteScrollElement).complete();
     }
 
-    if(!isAuthenticated) {
+    if(!isAuthenticated && !isLoading) {
         history.push("/login")
     }
 
-    if (!data) {
+    if (!data || isLoading) {
         return (
             <IonPage>
                 <IonContent class="spinner">
@@ -53,7 +53,7 @@ const Orders: React.FC = () => {
         return (
             <IonPage>
                 <IonContent className="ion-padding">
-                    <IonSearchbar animated={true} placeholder="Rechercher un produit" show-clear-button="focus"></IonSearchbar>
+                    <IonSearchbar animated={true} placeholder="Rechercher une commande" show-clear-button="focus"></IonSearchbar>
                     {data.map((order: any) =>
                         <IonCard key={order?.id} onClick={() => goToOrder(order.id)}>
                             <IonCardHeader>

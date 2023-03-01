@@ -11,7 +11,7 @@ import {
     IonPage,
     IonTitle,
     IonToolbar,
-    IonAvatar, IonCard, IonCardContent
+    IonAvatar, IonCard, IonCardContent, IonSpinner
 } from '@ionic/react';
 
 import React from "react";
@@ -22,13 +22,22 @@ import {useHistory} from "react-router-dom";
 
 const Profile: React.FC = () => {
 
-    const { isAuthenticated, user } = useAuth0();
+    const { isAuthenticated, user, isLoading } = useAuth0();
     const history = useHistory();
 
-    if(!isAuthenticated) {
+    if(!isAuthenticated && !isLoading) {
         history.push("/login")
     }
 
+    if (isLoading) {
+        return (
+            <IonPage>
+                <IonContent class="spinner">
+                    <IonSpinner name="crescent"></IonSpinner>
+                </IonContent>
+            </IonPage>
+        );
+    }
     return (
         <IonPage>
             <IonContent className="ion-padding ion-align-items-center">

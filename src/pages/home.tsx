@@ -1,41 +1,44 @@
 import {
-    IonContent,
-    IonPage,
     IonCard,
+    IonCardContent,
     IonCardHeader,
     IonCardTitle,
-    IonCardContent,
-    IonSpinner, IonInfiniteScroll, IonInfiniteScrollContent, IonImg, IonSearchbar
+    IonContent,
+    IonImg,
+    IonPage,
+    IonSearchbar,
+    IonSpinner
 } from '@ionic/react';
 
-import { useHistory } from 'react-router-dom';
+import {useHistory} from 'react-router-dom';
 import './styles/home.css';
 import FetchDatas from "../services/fetchDatas";
-import React, {useEffect, useState} from "react";
-import {Simulate} from "react-dom/test-utils";
-import waiting = Simulate.waiting;
+import React, {useState} from "react";
 import {useAuth0} from "@auth0/auth0-react";
 
-const Order: React.FC = () => {
+const Home: React.FC = () => {
 
     const [limit, setLimit] = useState<number>(10);
     const {data} = FetchDatas("https://615f5fb4f7254d0017068109.mockapi.io/api/v1/products?page=1&limit=" + limit);
-    const { isLoading, isAuthenticated } = useAuth0();
+    const { isLoading, isAuthenticated, getAccessTokenSilently } = useAuth0();
 
     const history = useHistory();
 
     const goToProduct = (id: string) => {
         history.push(`/product/${id}`);
     }
+    const getAccessToken = () => {
+        const accessToken =  getAccessTokenSilently();
+        return fetch(`${process.env.REACT_APP_AUTH0_DOMAIN}/api/v2/roles`, {
+            headers: {
+                Authorization: `Bearer ${accessToken}`,
+            },
+        });
+    };
 
     function getRandomImage(max : number) {
        const integer = Math.floor(Math.random() * max) + 1;
        return "/assets/image/cafe-" + integer + ".png";
-    }
-
-    function searchNext(event: CustomEvent<void>) {
-        setLimit(limit + 10);
-        (event.target as HTMLIonInfiniteScrollElement).complete();
     }
 
     if(!isAuthenticated && !isLoading) {
@@ -64,16 +67,10 @@ const Order: React.FC = () => {
                             <IonCardContent> {profile?.description}</IonCardContent>
                             <IonCardContent> {profile?.price} </IonCardContent>
                         </IonCard>)}
-                    <IonInfiniteScroll threshold="100px"
-                                       onIonInfinite={(e: CustomEvent<void>) => searchNext(e)}>
-                        <IonInfiniteScrollContent
-                            loadingSpinner="circular">
-                        </IonInfiniteScrollContent>
-                    </IonInfiniteScroll>
                 </IonContent>
             </IonPage>
         );
     }
 };
 
-export default Order;
+export default Home;
