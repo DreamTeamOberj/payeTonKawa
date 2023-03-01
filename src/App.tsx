@@ -16,7 +16,8 @@ import Home from "./pages/home"
 import Profile from "./pages/profile"
 import Product from "./pages/product"
 import SignIn from './pages/signIn';
-import Orders from "./pages/orders"
+import Orders from "./pages/orders";
+import Product_in_order from "./pages/product_in_order";
 
 /* Core CSS required for Ionic components to work properly */
 import '@ionic/react/css/core.css';
@@ -78,7 +79,7 @@ const App: React.FC = () => {
                         <Route exact path="/profile"><Profile/></Route>
                         <Route exact path="/product/:id"><Product/></Route>
                         <Route exact path="/order"><Orders/></Route>
-                        <Route exact path="/order/:id"><Orders/></Route>
+                        <Route exact path="/order/:id"><Product_in_order/></Route>
                     </IonRouterOutlet>
                     <IonTabBar id="tabBar" slot="bottom">
                         <IonTabButton tab="Order" href="/order">

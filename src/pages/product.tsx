@@ -16,7 +16,7 @@ import {useAuth0} from "@auth0/auth0-react";
 const Product: React.FC = () => {
 
     const { id } : any = useParams();
-    const { data } : any = FetchDatas("https://apicrm.vercel.app/customer/" + id);
+    const { data } : any = FetchDatas("https://api-erp.vercel.app/product/" + id);
     const { isAuthenticated } = useAuth0();
     const history = useHistory();
 

@@ -24,7 +24,7 @@ const Orders: React.FC = () => {
     const history = useHistory();
 
     const goToOrder = (id: string) => {
-        history.push(`/product/${id}`);
+        history.push(`/order/${id}`);
     }
 
     function getRandomImage(max : number) {
@@ -55,7 +55,7 @@ const Orders: React.FC = () => {
                 <IonContent className="ion-padding">
                     <IonSearchbar animated={true} placeholder="Rechercher un produit" show-clear-button="focus"></IonSearchbar>
                     {data.map((order: any) =>
-                        <IonCard key={order?.idOrders} onClick={() => goToOrder(order.id)}>
+                        <IonCard key={order?.idOrders} onClick={() => goToOrder(order.idOrders)}>
                             <IonCardHeader>
                                 <IonCardTitle>{order?.postal_code} - {order?.city} </IonCardTitle>
                             </IonCardHeader>
