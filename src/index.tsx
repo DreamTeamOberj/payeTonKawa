@@ -4,20 +4,11 @@ import App from './App';
 import * as serviceWorkerRegistration from './serviceWorkerRegistration';
 import reportWebVitals from './reportWebVitals';
 import {Auth0Provider} from "@auth0/auth0-react";
-import history from "./utils/history";
 
 const container = document.getElementById('root');
 const root = createRoot(container!);
 const domain: string = process.env.REACT_APP_AUTH0_DOMAIN!;
 const clientId: string = process.env.REACT_APP_AUTHO_CLIENT_ID!;
-
-const onRedirectCallback = (appState: any) => {
-    history.push(
-        appState && appState.targetUrl
-            ? appState.targetUrl
-            : window.location.pathname
-    );
-};
 
 root.render(
     <Auth0Provider
