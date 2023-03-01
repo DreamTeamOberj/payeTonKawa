@@ -16,13 +16,15 @@ import {useAuth0} from "@auth0/auth0-react";
 const Product: React.FC = () => {
 
     const { id } : any = useParams();
-    const { data } : any = FetchDatas("https://615f5fb4f7254d0017068109.mockapi.io/api/v1/products/" + id);
+    const { data } : any = FetchDatas("https://api-erp.vercel.app/product/" + id);
     const { isAuthenticated } = useAuth0();
     const history = useHistory();
 
     if(!isAuthenticated) {
         history.push("/login")
     }
+
+    console.log(data);
 
     if (!data) {
         return <IonPage>
@@ -31,15 +33,15 @@ const Product: React.FC = () => {
             </IonContent>
         </IonPage>;
     } else {
-        const product = data
+        const product = data[0]
         return (
             <IonPage>
                 <IonContent className="ion-padding">
                     <IonCard className="product ion-padding">
                         <h1>{product.name}</h1>
-                        <p>Price: {product.details.price}</p>
-                        <p>Description: {product.details.description}</p>
-                        <p>Color: {product.details.color}</p>
+                        <p>Price: {product.price}</p>
+                        <p>Description: {product.description}</p>
+                        <p>Color: {product.color}</p>
                         <p>Stock: {product.stock}</p>
                     </IonCard>
                 </IonContent>

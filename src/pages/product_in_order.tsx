@@ -1,45 +1,42 @@
 import {
+    IonContent,
+    IonPage,
     IonCard,
-    IonCardContent,
     IonCardHeader,
     IonCardTitle,
-    IonContent,
-    IonImg,
-    IonPage,
-    IonSearchbar,
-    IonSpinner
+    IonCardContent,
+    IonSpinner, IonInfiniteScroll, IonInfiniteScrollContent, IonImg, IonSearchbar
 } from '@ionic/react';
 
-import {useHistory} from 'react-router-dom';
-import './styles/home.css';
+import { useHistory, useParams } from 'react-router-dom';
+import './styles/product_in_order.css';
 import FetchDatas from "../services/fetchDatas";
-import React, {useState} from "react";
+import React, {useEffect, useState} from "react";
+import {Simulate} from "react-dom/test-utils";
+import waiting = Simulate.waiting;
 import {useAuth0} from "@auth0/auth0-react";
 
-const Home: React.FC = () => {
+const Product_in_order: React.FC = () => {
 
+    const { id } : any = useParams();
     const [limit, setLimit] = useState<number>(10);
-    const {data} = FetchDatas("https://api-erp.vercel.app/products/");
-    const { isLoading, isAuthenticated, getAccessTokenSilently } = useAuth0();
-
+    const {data} = FetchDatas("https://api-erp.vercel.app/order/" + id + "/products");
+    const { isLoading, isAuthenticated } = useAuth0();
 
     const history = useHistory();
 
     const goToProduct = (id: string) => {
         history.push(`/product/${id}`);
     }
-    const getAccessToken = () => {
-        const accessToken =  getAccessTokenSilently();
-        return fetch(`${process.env.REACT_APP_AUTH0_DOMAIN}/api/v2/roles`, {
-            headers: {
-                Authorization: `Bearer ${accessToken}`,
-            },
-        });
-    };
 
     function getRandomImage(max : number) {
        const integer = Math.floor(Math.random() * max) + 1;
        return "/assets/image/cafe-" + integer + ".png";
+    }
+
+    function searchNext(event: CustomEvent<void>) {
+        setLimit(limit + 10);
+        (event.target as HTMLIonInfiniteScrollElement).complete();
     }
 
     if(!isAuthenticated && !isLoading) {
@@ -55,6 +52,8 @@ const Home: React.FC = () => {
             </IonPage>
         );
     } else {
+
+        
         return (
             <IonPage>
                 <IonContent className="ion-padding">
@@ -68,10 +67,16 @@ const Home: React.FC = () => {
                             <IonCardContent> {product?.description}</IonCardContent>
                             <IonCardContent> {product?.price} </IonCardContent>
                         </IonCard>)}
+                    <IonInfiniteScroll threshold="100px"
+                                       onIonInfinite={(e: CustomEvent<void>) => searchNext(e)}>
+                        <IonInfiniteScrollContent
+                            loadingSpinner="circular">
+                        </IonInfiniteScrollContent>
+                    </IonInfiniteScroll>
                 </IonContent>
             </IonPage>
         );
     }
 };
 
-export default Home;
+export default Product_in_order;
