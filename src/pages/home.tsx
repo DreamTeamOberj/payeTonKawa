@@ -19,7 +19,7 @@ import {useAuth0} from "@auth0/auth0-react";
 const Order: React.FC = () => {
 
     const [limit, setLimit] = useState<number>(10);
-    const {data} = FetchDatas("https://615f5fb4f7254d0017068109.mockapi.io/api/v1/products?page=1&limit=" + limit);
+    const {data} = FetchDatas("https://api-erp.vercel.app/products/");
     const { isLoading, isAuthenticated } = useAuth0();
 
     const history = useHistory();
@@ -55,14 +55,14 @@ const Order: React.FC = () => {
             <IonPage>
                 <IonContent className="ion-padding">
                     <IonSearchbar animated={true} placeholder="Rechercher un produit" show-clear-button="focus"></IonSearchbar>
-                    {data.map((profile: any) =>
-                        <IonCard key={profile?.id} onClick={() => goToProduct(profile.id)}>
+                    {data.map((product: any) =>
+                        <IonCard key={product?.idProduct} onClick={() => goToProduct(product.idProduct)}>
                             <IonCardHeader>
-                                <IonCardTitle>{profile?.name}</IonCardTitle>
+                                <IonCardTitle>{product?.name}</IonCardTitle>
                             </IonCardHeader>
                             <IonImg className="image-home" src={getRandomImage(4)}></IonImg>
-                            <IonCardContent> {profile?.description}</IonCardContent>
-                            <IonCardContent> {profile?.price} </IonCardContent>
+                            <IonCardContent> {product?.description}</IonCardContent>
+                            <IonCardContent> {product?.price} </IonCardContent>
                         </IonCard>)}
                     <IonInfiniteScroll threshold="100px"
                                        onIonInfinite={(e: CustomEvent<void>) => searchNext(e)}>
