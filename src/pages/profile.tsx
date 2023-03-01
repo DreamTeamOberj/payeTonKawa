@@ -17,11 +17,18 @@ import {
 import React from "react";
 import './styles/profile.css';
 import {useAuth0} from "@auth0/auth0-react";
+import history from "../services/history";
+import {useHistory} from "react-router-dom";
 
 const Profile: React.FC = () => {
 
-    const { user } = useAuth0();
-    console.log(user)
+    const { isAuthenticated, user } = useAuth0();
+    const history = useHistory();
+
+    if(!isAuthenticated) {
+        history.push("/login")
+    }
+
     return (
         <IonPage>
             <IonContent className="ion-padding ion-align-items-center">
@@ -31,8 +38,7 @@ const Profile: React.FC = () => {
                     <img src={user?.picture} alt="Profile picture"/>
                     </IonAvatar>
                     <IonCardContent>
-                        {user?.name}
-                        {user?.email}
+                        Email : {user?.name}
                     </IonCardContent>
                 </IonCard>
             </IonContent>

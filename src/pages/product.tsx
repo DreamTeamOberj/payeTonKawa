@@ -10,13 +10,19 @@ import {
 
 import './styles/product.css';
 import FetchDatas from "../services/fetchDatas";
-import { useParams } from "react-router-dom";
+import {useHistory, useParams} from "react-router-dom";
+import {useAuth0} from "@auth0/auth0-react";
 
 const Product: React.FC = () => {
 
     const { id } : any = useParams();
-
     const { data } : any = FetchDatas("https://615f5fb4f7254d0017068109.mockapi.io/api/v1/products/" + id);
+    const { isAuthenticated } = useAuth0();
+    const history = useHistory();
+
+    if(!isAuthenticated) {
+        history.push("/login")
+    }
 
     if (!data) {
         return <IonPage>

@@ -35,11 +35,7 @@ const Login: React.FC = () => {
                         <IonInput type='password'></IonInput>
                     </IonItem>
                     <div className='element-margin-top-high list-button'>
-                        <IonButton className="element-margin-right" onClick={() => loginWithRedirect({
-                            appState: {
-                                returnTo: "/home"
-                            }
-                        })}>Connexion</IonButton>
+                        <IonButton className="element-margin-right" onClick={() => loginWithRedirect()}>Connexion</IonButton>
                     </div>
                 </form>
             </IonContent>

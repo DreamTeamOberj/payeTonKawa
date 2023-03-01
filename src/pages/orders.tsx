@@ -14,12 +14,13 @@ import FetchDatas from "../services/fetchDatas";
 import React, {useEffect, useState} from "react";
 import {Simulate} from "react-dom/test-utils";
 import waiting = Simulate.waiting;
+import {useAuth0} from "@auth0/auth0-react";
 
 const Orders: React.FC = () => {
 
     const [limit, setLimit] = useState<number>(10);
     const {data} = FetchDatas("https://615f5fb4f7254d0017068109.mockapi.io/api/v1/products?page=1&limit=" + limit);
-
+    const { isAuthenticated } = useAuth0();
     const history = useHistory();
 
     const goToOrder = (id: string) => {
@@ -34,6 +35,10 @@ const Orders: React.FC = () => {
     function searchNext(event: CustomEvent<void>) {
         setLimit(limit + 10);
         (event.target as HTMLIonInfiniteScrollElement).complete();
+    }
+
+    if(!isAuthenticated) {
+        history.push("/login")
     }
 
     if (!data) {
