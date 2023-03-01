@@ -38,7 +38,7 @@ const Profile: React.FC = () => {
             </IonPage>
         );
     }
-    return (
+    return (        
         <IonPage>
             <IonContent className="ion-padding ion-align-items-center">
                 <IonCard className="card-profile">
