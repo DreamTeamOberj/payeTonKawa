@@ -5,6 +5,7 @@ import * as serviceWorkerRegistration from './serviceWorkerRegistration';
 import reportWebVitals from './reportWebVitals';
 import {Auth0Provider} from "@auth0/auth0-react";
 
+
 const container = document.getElementById('root');
 const root = createRoot(container!);
 const domain: string = process.env.REACT_APP_AUTH0_DOMAIN!;
