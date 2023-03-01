@@ -15,8 +15,11 @@ import {
 
 import './styles/login.css';
 import React from "react";
+import {useAuth0} from "@auth0/auth0-react";
 
 const Login: React.FC = () => {
+    const {loginWithRedirect} = useAuth0();
+
     return (
         <IonPage>
             <IonContent className="ion-padding">
@@ -27,13 +30,16 @@ const Login: React.FC = () => {
                         <IonInput type='email'></IonInput>
                     </IonItem>
 
-                    <IonItem  className='element-margin-top'>
+                    <IonItem className='element-margin-top'>
                         <IonLabel position="floating">Password</IonLabel>
                         <IonInput type='password'></IonInput>
-                    </IonItem >
+                    </IonItem>
                     <div className='element-margin-top-high list-button'>
-                        <IonButton className="element-margin-right">Connexion</IonButton>
-                        <IonButton href='/sign-in'>Créer un compte</IonButton>
+                        <IonButton className="element-margin-right" onClick={() => loginWithRedirect({
+                            appState: {
+                                returnTo: "/home"
+                            }
+                        })}>Connexion</IonButton>
                     </div>
                 </form>
             </IonContent>
