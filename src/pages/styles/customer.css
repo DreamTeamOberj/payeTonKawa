@@ -1,0 +1,6 @@
+.card-customer {
+    min-height : 0;
+    height: 90px;
+    display: flex;
+    flex-direction: column;
+}

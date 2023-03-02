@@ -7,7 +7,7 @@ import {
     IonImg,
     IonPage,
     IonSearchbar,
-    IonSpinner
+    IonSpinner, useIonToast
 } from '@ionic/react';
 
 import {useHistory} from 'react-router-dom';
@@ -18,24 +18,12 @@ import {useAuth0} from "@auth0/auth0-react";
 
 const Home: React.FC = () => {
 
-    const [limit, setLimit] = useState<number>(10);
     const {data} = FetchDatas("https://api-erp.vercel.app/products/");
-    const { isLoading, isAuthenticated, getAccessTokenSilently } = useAuth0();
-
-
+    const { isLoading, isAuthenticated, user } = useAuth0();
     const history = useHistory();
-
     const goToProduct = (id: string) => {
         history.push(`/product/${id}`);
     }
-    const getAccessToken = () => {
-        const accessToken =  getAccessTokenSilently();
-        return fetch(`${process.env.REACT_APP_AUTH0_DOMAIN}/api/v2/roles`, {
-            headers: {
-                Authorization: `Bearer ${accessToken}`,
-            },
-        });
-    };
 
     function getRandomImage(max : number) {
        const integer = Math.floor(Math.random() * max) + 1;
