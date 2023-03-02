@@ -10,7 +10,16 @@ import {
     setupIonicReact
 } from '@ionic/react';
 import {IonReactRouter} from '@ionic/react-router';
-import {basket, exit, homeOutline, personCircleOutline, square, triangle} from 'ionicons/icons';
+import {
+    basket,
+    exit,
+    homeOutline,
+    listSharp,
+    personCircle,
+    personCircleOutline,
+    square,
+    triangle
+} from 'ionicons/icons';
 import Login from "./pages/login";
 import Home from "./pages/home"
 import Profile from "./pages/profile"
@@ -18,6 +27,7 @@ import Product from "./pages/product"
 import SignIn from './pages/signIn';
 import Orders from "./pages/orders";
 import Product_in_order from "./pages/product_in_order";
+import Customer from "./pages/customer";
 
 /* Core CSS required for Ionic components to work properly */
 import '@ionic/react/css/core.css';
@@ -39,6 +49,9 @@ import '@ionic/react/css/display.css';
 import './theme/variables.css';
 import React, {useEffect} from "react";
 import {useAuth0} from "@auth0/auth0-react";
+import history from "./services/history";
+import RestrictedRoute from "./components/restrictedRoute";
+
 
 setupIonicReact();
 
@@ -67,7 +80,7 @@ const App: React.FC = () => {
         <IonApp>
             <IonHeader>
                 <IonTabBar id="headerTabBar">
-                    <IonTabButton tab="home2" href="/home">
+                    <IonTabButton tab="home" href="/home">
                         <IonImg src="/assets/icon/icon.png"/>
                     </IonTabButton>
                     <IonTabButton className="left-button" >
@@ -84,18 +97,22 @@ const App: React.FC = () => {
                         <Route exact path="/home"><Home/></Route>
                         <Route exact path="/profile"><Profile/></Route>
                         <Route exact path="/product/:id"><Product/></Route>
-                        <Route exact path="/order"><Orders/></Route>
-                        <Route exact path="/order/:id"><Product_in_order/></Route>
+                        <Route exact path="/order"> <Orders/></Route>
+                        <Route exact path="/order/:id"> <Product_in_order/></Route>
+                        <RestrictedRoute path="/customers" roles={['admin']} component={Customer}/>
                     </IonRouterOutlet>
                     <IonTabBar id="tabBar" slot="bottom">
-                        <IonTabButton tab="Order" href="/order">
+                        <IonTabButton tab="order" href="/order">
                             <IonIcon icon={basket}/>
                         </IonTabButton>
                         <IonTabButton tab="home" href="/home">
-                            <IonIcon icon={homeOutline}/>
+                            <IonIcon icon={homeOutline} />
                         </IonTabButton>
-                        <IonTabButton tab="Profile" href="/profile">
-                            <IonIcon icon={personCircleOutline}/>
+                        <IonTabButton tab="customers" href="/customers">
+                            <IonIcon icon={listSharp} />
+                        </IonTabButton>
+                        <IonTabButton tab="profile" href="/profile">
+                            <IonIcon icon={personCircleOutline} />
                         </IonTabButton>
                     </IonTabBar>
                 </IonTabs>
