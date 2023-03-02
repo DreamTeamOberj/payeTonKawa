@@ -10,17 +10,26 @@ import {
     IonSpinner, useIonToast
 } from '@ionic/react';
 
-import {useHistory} from 'react-router-dom';
+
+import {Redirect, useHistory} from 'react-router-dom';
 import './styles/home.css';
 import FetchDatas from "../services/fetchDatas";
 import React, {useState} from "react";
 import {useAuth0} from "@auth0/auth0-react";
 
+
 const Home: React.FC = () => {
 
     const {data} = FetchDatas("https://api-erp.vercel.app/products/");
-    const { isLoading, isAuthenticated, user } = useAuth0();
     const history = useHistory();
+    const { isLoading, isAuthenticated, getAccessTokenSilently, user, logout } = useAuth0();
+
+    if (user?.email_verified == false && !isLoading) {
+        console.log("EMAIL NON VERIFIÉ");
+        
+        logout()
+    }
+
     const goToProduct = (id: string) => {
         history.push(`/product/${id}`);
     }

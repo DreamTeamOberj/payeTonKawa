@@ -68,7 +68,13 @@ const App: React.FC = () => {
         }
     });
 
+    const history = useHistory();
+
     const { logout } = useAuth0();
+
+    const deconnexion = () => {
+        logout();
+    }
 
     return (
         <IonApp>
@@ -78,7 +84,7 @@ const App: React.FC = () => {
                         <IonImg src="/assets/icon/icon.png"/>
                     </IonTabButton>
                     <IonTabButton className="left-button" >
-                        <IonIcon icon={exit} onClick={() => logout()}/>
+                        <IonIcon icon={exit} onClick={() => deconnexion()}/>
                     </IonTabButton>
                 </IonTabBar>
             </IonHeader>
