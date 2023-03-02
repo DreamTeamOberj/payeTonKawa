@@ -76,7 +76,7 @@ On your web browser navigate to [localhost](http://localhost:8100/).
 * Gabriel Filiot
 * Romain Martineau
 * Antoine Deyris
-* Juliette Etchebest
+* Juliette Raynaud
 
 
 [React.js]: https://img.shields.io/badge/React-20232A?style=for-the-badge&logo=react&logoColor=61DAFB
