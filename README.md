@@ -75,8 +75,8 @@ On your web browser navigate to [localhost](http://localhost:8100/).
 * Yohann Durel
 * Gabriel Filiot
 * Romain Martineau
-* Erwan Leblanc
 * Antoine Deyris
+* Juliette Etchebest
 
 
 [React.js]: https://img.shields.io/badge/React-20232A?style=for-the-badge&logo=react&logoColor=61DAFB
